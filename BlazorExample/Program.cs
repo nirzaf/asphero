@@ -28,8 +28,6 @@ namespace BlazorExample
             //****other variants for service registration on singleton example****
             //builder.Services.AddSingleton<Scoped>();
 
-            //var singleton = new Scoped();
-            //builder.Services.AddSingleton<IScoped>(singleton);
 
             //****
 
