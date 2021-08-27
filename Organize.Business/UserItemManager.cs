@@ -103,10 +103,9 @@ namespace Organize.Business
                     await _itemDataAccess.UpdateItemAsync(parentItem);
                     break;
                 case ChildItem childItem:
-                    await _itemDataAccess.UpdateItemAsync(childItem); 
+                    await _itemDataAccess.UpdateItemAsync(childItem);
                     break;
             }
-
         }
 
         public async Task DeleteAllDoneAsync(User user)
@@ -122,10 +121,7 @@ namespace Organize.Business
             await _itemDataAccess.DeleteItemsAsync(doneItems.OfType<TextItem>());
             await _itemDataAccess.DeleteItemsAsync(doneItems.OfType<UrlItem>());
 
-            foreach (var doneItem in doneItems)
-            {
-                user.UserItems.Remove(doneItem);
-            }
+            foreach (var doneItem in doneItems) user.UserItems.Remove(doneItem);
 
             var sortedByPosition = user.UserItems.OrderBy(i => i.Position);
             var position = 1;

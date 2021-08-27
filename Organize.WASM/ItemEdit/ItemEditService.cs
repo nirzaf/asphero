@@ -14,13 +14,10 @@ namespace Organize.WASM.ItemEdit
 
         public BaseItem EditItem
         {
-            get { return _editItem; }
+            get => _editItem;
             set
             {
-                if (_editItem == value)
-                {
-                    return;
-                }
+                if (_editItem == value) return;
 
                 _editItem = value;
                 var args = new ItemEditEventArgs();
@@ -31,11 +28,8 @@ namespace Organize.WASM.ItemEdit
 
         protected virtual void OnEditItemChanged(ItemEditEventArgs e)
         {
-            EventHandler<ItemEditEventArgs> handler = EditItemChanged;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            var handler = EditItemChanged;
+            if (handler != null) handler(this, e);
         }
     }
 }

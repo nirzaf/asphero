@@ -10,14 +10,11 @@ namespace BlazorExample.Components.DependencyInjection
 {
     public class DependencyInjectionComponentBase : ComponentBase
     {
-        [Inject]
-        protected IScoped Scoped { get; set; }
+        [Inject] protected IScoped Scoped { get; set; }
 
-        [Inject]
-        protected ISingleton Singleton { get; set; }
+        [Inject] protected ISingleton Singleton { get; set; }
 
-        [Inject]
-        protected ITransient Transient { get; set; }
+        [Inject] protected ITransient Transient { get; set; }
 
         protected override void OnInitialized()
         {

@@ -15,20 +15,16 @@ namespace Organize.WASM.Components
 {
     public partial class ItemsList : ComponentBase, IDisposable
     {
-        [Inject]
-        private ICurrentUserService CurrentUserService { get; set; }
+        [Inject] private ICurrentUserService CurrentUserService { get; set; }
 
-        [Inject]
-        private IUserItemManager userItemManager { get; set; }
+        [Inject] private IUserItemManager userItemManager { get; set; }
 
 
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
-        [Inject]
-        private ItemEditService ItemEditService { get; set; }
+        [Inject] private ItemEditService ItemEditService { get; set; }
 
-        protected ObservableCollection<BaseItem> UserItems { get; set; } = new ObservableCollection<BaseItem>();
+        protected ObservableCollection<BaseItem> UserItems { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
@@ -42,11 +38,9 @@ namespace Organize.WASM.Components
 
         private void HandleUserPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName.Equals(nameof(User.UserItems)))
+            if (e.PropertyName.Equals(nameof(User.UserItems)))
             {
-                if(UserItems != null) { 
-                    UserItems.CollectionChanged -= HandleUserItemsCollectionChanged;
-                }
+                if (UserItems != null) UserItems.CollectionChanged -= HandleUserItemsCollectionChanged;
 
                 UserItems = CurrentUserService.CurrentUser.UserItems;
                 UserItems.CollectionChanged += HandleUserItemsCollectionChanged;

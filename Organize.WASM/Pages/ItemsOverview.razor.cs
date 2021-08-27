@@ -14,17 +14,13 @@ namespace Organize.WASM.Pages
     {
         //[Inject]
         //private ItemEditService ItemEditService { get; set; }
-        [Inject]
-        private IUserItemManager UserItemManager { get; set; }
+        [Inject] private IUserItemManager UserItemManager { get; set; }
 
-        [Inject]
-        private ICurrentUserService CurrentUserService { get; set; }
+        [Inject] private ICurrentUserService CurrentUserService { get; set; }
 
-        [Parameter]
-        public string TypeString { get; set; }
+        [Parameter] public string TypeString { get; set; }
 
-        [Parameter]
-        public int? Id { get; set; }
+        [Parameter] public int? Id { get; set; }
 
         private DropdownItem<ItemTypeEnum> SelectedDropDownType { get; set; }
 
@@ -58,12 +54,9 @@ namespace Organize.WASM.Pages
         {
             base.OnParametersSet();
             if (Id != null && Enum.TryParse(typeof(ItemTypeEnum), TypeString, out _))
-            {
                 ShowEdit = true;
-            } else
-            {
+            else
                 ShowEdit = false;
-            }
         }
 
         private void HandleEditItemChanged(object sender, ItemEditEventArgs e)
@@ -74,10 +67,7 @@ namespace Organize.WASM.Pages
 
         private async void AddNewAsync()
         {
-            if(SelectedDropDownType == null)
-            {
-                return;
-            }
+            if (SelectedDropDownType == null) return;
 
             await UserItemManager.CreateNewUserItemAndAddItToUserAsync(
                 CurrentUserService.CurrentUser,

@@ -1,18 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Organize.TestFake;
@@ -48,7 +40,7 @@ namespace Organize.WebApi
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             });
-  
+
             authenticationBuilder.AddJwtBearer(x =>
             {
                 x.RequireHttpsMetadata = false;
@@ -68,10 +60,7 @@ namespace Organize.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
 
@@ -89,7 +78,7 @@ namespace Organize.WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-               // endpoints.MapControllerRoute("default", "{controller=Home}/{id?}");
+                // endpoints.MapControllerRoute("default", "{controller=Home}/{id?}");
             });
         }
     }

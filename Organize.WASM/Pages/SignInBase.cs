@@ -20,25 +20,19 @@ namespace Organize.WASM.Pages
     {
         protected string Day { get; } = DateTime.Now.DayOfWeek.ToString();
 
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
-        [Inject]
-        private IUserManager UserManager { get; set; }
+        [Inject] private IUserManager UserManager { get; set; }
 
 
-        [Inject]
-        private IModalService ModalService { get; set; }
+        [Inject] private IModalService ModalService { get; set; }
 
 
-        [Inject]
-        private BusyOverlayService BusyOverlayService { get; set; }
+        [Inject] private BusyOverlayService BusyOverlayService { get; set; }
 
-        [Inject]
-        private ICurrentUserService CurrentUserService { get; set; }
+        [Inject] private ICurrentUserService CurrentUserService { get; set; }
 
-        [Inject]
-        private IAuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private IAuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         public bool ShowPassword { get; set; }
 
@@ -57,10 +51,7 @@ namespace Organize.WASM.Pages
 
         protected async void OnSubmit()
         {
-            if (!EditContext.Validate())
-            {
-                return;
-            }
+            if (!EditContext.Validate()) return;
 
             try
             {
@@ -72,14 +63,15 @@ namespace Organize.WASM.Pages
                     AuthenticationStateProvider.SetAuthenticatedState(foundUser);
                     CurrentUserService.CurrentUser = foundUser;
                     NavigationManager.NavigateTo("items");
-                } else
+                }
+                else
                 {
                     var parameters = new ModalParameters();
                     parameters.Add(nameof(ModalMessage.Message), "User not found");
                     ModalService.Show<ModalMessage>("Error", parameters);
                 }
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 var parameters = new ModalParameters();
                 parameters.Add(nameof(ModalMessage.Message), e.Message);

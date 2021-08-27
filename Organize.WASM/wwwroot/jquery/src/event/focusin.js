@@ -1,13 +1,13 @@
-define( [
-	"../core",
-	"../data/var/dataPriv",
-	"./support",
+define([
+        "../core",
+        "../data/var/dataPriv",
+        "./support",
+        "../event",
+        "./trigger"
+    ],
+    function(jQuery, dataPriv, support) {
 
-	"../event",
-	"./trigger"
-], function( jQuery, dataPriv, support ) {
-
-"use strict";
+        "use strict";
 
 // Support: Firefox <=44
 // Firefox doesn't have focus(in | out) events
@@ -17,42 +17,43 @@ define( [
 // focus(in | out) events fire after focus & blur events,
 // which is spec violation - http://www.w3.org/TR/DOM-Level-3-Events/#events-focusevent-event-order
 // Related ticket - https://bugs.chromium.org/p/chromium/issues/detail?id=449857
-if ( !support.focusin ) {
-	jQuery.each( { focus: "focusin", blur: "focusout" }, function( orig, fix ) {
+        if (!support.focusin) {
+            jQuery.each({ focus: "focusin", blur: "focusout" },
+                function(orig, fix) {
 
-		// Attach a single capturing handler on the document while someone wants focusin/focusout
-		var handler = function( event ) {
-			jQuery.event.simulate( fix, event.target, jQuery.event.fix( event ) );
-		};
+                    // Attach a single capturing handler on the document while someone wants focusin/focusout
+                    var handler = function(event) {
+                        jQuery.event.simulate(fix, event.target, jQuery.event.fix(event));
+                    };
 
-		jQuery.event.special[ fix ] = {
-			setup: function() {
+                    jQuery.event.special[fix] = {
+                        setup: function() {
 
-				// Handle: regular nodes (via `this.ownerDocument`), window
-				// (via `this.document`) & document (via `this`).
-				var doc = this.ownerDocument || this.document || this,
-					attaches = dataPriv.access( doc, fix );
+                            // Handle: regular nodes (via `this.ownerDocument`), window
+                            // (via `this.document`) & document (via `this`).
+                            var doc = this.ownerDocument || this.document || this,
+                                attaches = dataPriv.access(doc, fix);
 
-				if ( !attaches ) {
-					doc.addEventListener( orig, handler, true );
-				}
-				dataPriv.access( doc, fix, ( attaches || 0 ) + 1 );
-			},
-			teardown: function() {
-				var doc = this.ownerDocument || this.document || this,
-					attaches = dataPriv.access( doc, fix ) - 1;
+                            if (!attaches) {
+                                doc.addEventListener(orig, handler, true);
+                            }
+                            dataPriv.access(doc, fix, (attaches || 0) + 1);
+                        },
+                        teardown: function() {
+                            var doc = this.ownerDocument || this.document || this,
+                                attaches = dataPriv.access(doc, fix) - 1;
 
-				if ( !attaches ) {
-					doc.removeEventListener( orig, handler, true );
-					dataPriv.remove( doc, fix );
+                            if (!attaches) {
+                                doc.removeEventListener(orig, handler, true);
+                                dataPriv.remove(doc, fix);
 
-				} else {
-					dataPriv.access( doc, fix, attaches );
-				}
-			}
-		};
-	} );
-}
+                            } else {
+                                dataPriv.access(doc, fix, attaches);
+                            }
+                        }
+                    };
+                });
+        }
 
-return jQuery;
-} );
+        return jQuery;
+    });

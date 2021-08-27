@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Organize.WebAPIAccess
+﻿namespace Organize.WebAPIAccess
 {
-    class ErrorMessage
+    internal class ErrorMessage
     {
         public string Message { get; set; }
     }

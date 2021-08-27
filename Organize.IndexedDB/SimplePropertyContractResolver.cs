@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Organize.IndexedDB
 {
-    class SimplePropertyContractResolver : DefaultContractResolver
+    internal class SimplePropertyContractResolver : DefaultContractResolver
     {
         public SimplePropertyContractResolver()
         {
@@ -21,17 +21,13 @@ namespace Organize.IndexedDB
             var propertyType = property.PropertyType;
             var isSimpleProperty = propertyType == typeof(int) || propertyType == typeof(string) ||
                                    propertyType == typeof(decimal) || propertyType == typeof(float) ||
-                                   propertyType == typeof(double) || propertyType == typeof(bool) 
+                                   propertyType == typeof(double) || propertyType == typeof(bool)
                                    || propertyType.IsEnum;
 
             if (isSimpleProperty)
-            {
                 property.ShouldSerialize = instance => true;
-            }
             else
-            {
                 property.ShouldSerialize = instance => false;
-            }
             return property;
         }
     }

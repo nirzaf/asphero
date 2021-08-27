@@ -46,14 +46,13 @@ namespace BlazorExample.Components
         protected override async Task OnInitializedAsync()
         {
             await Task.Delay(2000);
-            User = new User {FirstName = "Benni"};
+            User = new User { FirstName = "Benni" };
             Console.WriteLine("OnInitializedAsync");
             await base.OnInitializedAsync();
         }
 
         protected override async Task OnParametersSetAsync()
         {
-
             Console.WriteLine("OnParametersSetAsync");
             await base.OnParametersSetAsync();
         }

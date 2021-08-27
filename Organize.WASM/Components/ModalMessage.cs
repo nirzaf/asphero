@@ -8,7 +8,6 @@ namespace Organize.WASM.Components
 {
     public partial class ModalMessage : ComponentBase
     {
-        [Parameter]
-        public string Message { get; set; }
+        [Parameter] public string Message { get; set; }
     }
 }

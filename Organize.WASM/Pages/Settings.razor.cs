@@ -10,14 +10,11 @@ namespace Organize.WASM.Pages
 {
     public partial class Settings : ComponentBase
     {
-        [Inject]
-        private IUserItemManager UserItemManager { get; set; }
+        [Inject] private IUserItemManager UserItemManager { get; set; }
 
-        [Inject]
-        private BusyOverlayService BusyOverlayService { get; set; }
+        [Inject] private BusyOverlayService BusyOverlayService { get; set; }
 
-        [Inject]
-        private ICurrentUserService CurrentUserService { get; set; }
+        [Inject] private ICurrentUserService CurrentUserService { get; set; }
 
         private async void DeleteAllDone()
         {

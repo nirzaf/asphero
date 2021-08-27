@@ -1,4 +1,4 @@
-﻿window.addEventListener('resize',
+﻿window.addEventListener("resize",
     () => {
         //Call the static Method OnResize in the Organize assembly
         console.log("Static Resize from js");
@@ -11,15 +11,15 @@
 
 window.blazorResize = {
     assignments: [],
-    registerReferenceForResizeEvent: (name,dotnetReference) => {
+    registerReferenceForResizeEvent: (name, dotnetReference) => {
         const handler = () => {
             console.log("HandleResize from js");
             dotnetReference.invokeMethodAsync("HandleResize", window.innerWidth, window.innerHeight);
-        }
+        };
         const assignment = {
             name: name,
             handler: handler
-        }
+        };
         blazorResize.assignments.push(assignment);
         window.addEventListener("resize", assignment.handler);
     },
@@ -30,4 +30,4 @@ window.blazorResize = {
             window.removeEventListener("resize", assignment.handler);
         }
     }
-}
+};

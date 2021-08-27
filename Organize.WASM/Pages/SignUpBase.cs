@@ -17,19 +17,16 @@ namespace Organize.WASM.Pages
 {
     public class SignUpBase : SignBase
     {
-        [Inject]
-        private NavigationManager NavigationManager { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
-        [Inject]
-        private BusyOverlayService BusyOverlayService { get; set; }
+        [Inject] private BusyOverlayService BusyOverlayService { get; set; }
 
-        [Inject]
-        private IUserManager UserManager { get; set; }
+        [Inject] private IUserManager UserManager { get; set; }
 
-        [Inject]
-        private IModalService ModalService { get; set; }
+        [Inject] private IModalService ModalService { get; set; }
 
-        protected IList<DropdownItem<GenderTypeEnum>> GenderTypeDropDownItems { get; } = new List<DropdownItem<GenderTypeEnum>>();
+        protected IList<DropdownItem<GenderTypeEnum>> GenderTypeDropDownItems { get; } =
+            new List<DropdownItem<GenderTypeEnum>>();
 
         protected DropdownItem<GenderTypeEnum> SelectedGenderTypeDropDownItem { get; set; }
 
@@ -68,10 +65,7 @@ namespace Organize.WASM.Pages
         {
             var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
             StringValues sv;
-            if(QueryHelpers.ParseQuery(uri.Query).TryGetValue("userName", out sv))
-            {
-                User.UserName = sv;
-            }
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("userName", out sv)) User.UserName = sv;
         }
 
         protected async void OnValidSubmit()
@@ -83,7 +77,7 @@ namespace Organize.WASM.Pages
                 await UserManager.InsertUserAsync(User);
                 NavigationManager.NavigateTo("signin");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var parameters = new ModalParameters();
                 parameters.Add(nameof(ModalMessage.Message), e.Message);

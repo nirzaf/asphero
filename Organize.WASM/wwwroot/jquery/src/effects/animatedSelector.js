@@ -1,15 +1,17 @@
-define( [
-	"../core",
-	"../selector",
-	"../effects"
-], function( jQuery ) {
+define([
+        "../core",
+        "../selector",
+        "../effects"
+    ],
+    function(jQuery) {
 
-"use strict";
+        "use strict";
 
-jQuery.expr.pseudos.animated = function( elem ) {
-	return jQuery.grep( jQuery.timers, function( fn ) {
-		return elem === fn.elem;
-	} ).length;
-};
+        jQuery.expr.pseudos.animated = function(elem) {
+            return jQuery.grep(jQuery.timers,
+                function(fn) {
+                    return elem === fn.elem;
+                }).length;
+        };
 
-} );
+    });

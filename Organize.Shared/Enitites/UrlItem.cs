@@ -11,6 +11,7 @@ namespace Organize.Shared.Enitites
             get => _url;
             set => SetProperty(ref _url, value);
         }
+
         private string _url;
     }
 }

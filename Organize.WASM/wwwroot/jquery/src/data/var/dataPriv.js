@@ -1,7 +1,8 @@
-define( [
-	"../Data"
-], function( Data ) {
-	"use strict";
+define([
+        "../Data"
+    ],
+    function(Data) {
+        "use strict";
 
-	return new Data();
-} );
+        return new Data();
+    });

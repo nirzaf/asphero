@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Organize.WebAPIAccess
@@ -94,6 +93,6 @@ namespace Organize.WebAPIAccess
             {
                 return new ErrorMessage { Message = "Unknown Error" };
             }
-        }   
+        }
     }
 }

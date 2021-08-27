@@ -12,15 +12,13 @@ namespace Organize.Shared.Enitites
             get => _childItems;
             set
             {
-                if (value == _childItems)
-                {
-                    return;
-                }
+                if (value == _childItems) return;
 
                 _childItems = value;
                 NotifyPropertyChanged();
             }
         }
+
         private ObservableCollection<ChildItem> _childItems;
     }
 }

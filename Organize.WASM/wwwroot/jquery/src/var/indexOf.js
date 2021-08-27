@@ -1,7 +1,8 @@
-define( [
-	"./arr"
-], function( arr ) {
-	"use strict";
+define([
+        "./arr"
+    ],
+    function(arr) {
+        "use strict";
 
-	return arr.indexOf;
-} );
+        return arr.indexOf;
+    });

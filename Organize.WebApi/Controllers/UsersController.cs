@@ -32,6 +32,7 @@ namespace Organize.WebApi.Controllers
             user.LastName = TestData.TestUser.LastName;
             Users.Add(user);
         }
+
         public UsersController(AppSettings appSettings)
         {
             _appSettings = appSettings;
@@ -42,10 +43,7 @@ namespace Organize.WebApi.Controllers
         {
             var id = int.Parse(Request.HttpContext.User.FindFirst("id").Value);
             var foundUser = Users.FirstOrDefault(u => u.Id == id);
-            if (foundUser == null)
-            {
-                return BadRequest(new { message = "User not found" });
-            }
+            if (foundUser == null) return BadRequest(new { message = "User not found" });
 
             return Ok(foundUser);
         }
@@ -55,18 +53,14 @@ namespace Organize.WebApi.Controllers
         public IActionResult Authenticate([FromBody] AuthUser user)
         {
             var foundUser = Users.FirstOrDefault(u => u.UserName == user.UserName && u.Password == user.Password);
-            if(foundUser == null)
-            {
-
-                return BadRequest(new { message = "User name or password invalid" });
-            }
+            if (foundUser == null) return BadRequest(new { message = "User name or password invalid" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var claims = new Claim[]
             {
-                new Claim("id",foundUser.Id.ToString()), 
-                new Claim(ClaimTypes.Role,"admin")
+                new("id", foundUser.Id.ToString()),
+                new(ClaimTypes.Role, "admin")
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -74,7 +68,7 @@ namespace Organize.WebApi.Controllers
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key), 
+                    new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -100,10 +94,7 @@ namespace Organize.WebApi.Controllers
         public IActionResult Post(User user)
         {
             var foundUser = Users.FirstOrDefault(u => u.UserName == user.UserName);
-            if (foundUser != null)
-            {
-                return BadRequest(new { message = "User already exists" });
-            }
+            if (foundUser != null) return BadRequest(new { message = "User already exists" });
 
             var newId = Users.Count == 0
                 ? 1

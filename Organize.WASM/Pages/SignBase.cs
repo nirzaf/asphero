@@ -11,7 +11,7 @@ namespace Organize.WASM.Pages
 {
     public class SignBase : ComponentBase
     {
-        protected User User { get; set; } = new User();
+        protected User User { get; set; } = new();
 
         protected EditContext EditContext { get; set; }
 
@@ -24,10 +24,7 @@ namespace Organize.WASM.Pages
 
         public string GetError(Expression<Func<object>> fu)
         {
-            if (EditContext == null)
-            {
-                return null;
-            }
+            if (EditContext == null) return null;
             return EditContext.GetValidationMessages(fu).FirstOrDefault();
         }
     }

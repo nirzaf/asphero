@@ -1,6 +1,6 @@
 ﻿export const getWidth = () => {
-    console.log("isolated")
-    return window.innerWidth
+    console.log("isolated");
+    return window.innerWidth;
 }
 
 //export function getWidth() {

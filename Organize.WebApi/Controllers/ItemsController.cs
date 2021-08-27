@@ -27,18 +27,15 @@ namespace Organize.WebApi.Controllers
         {
             Items = TestData.TestUser.UserItems.ToList();
             var childItems = Items.OfType<ParentItem>().SelectMany(p => p.ChildItems).ToList();
-            foreach (var childItem in childItems)
-            {
-                Items.Add(childItem);
-            }
+            foreach (var childItem in childItems) Items.Add(childItem);
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery]int type)
+        public IActionResult Get([FromQuery] int type)
         {
             var userId = int.Parse(Request.HttpContext.User.FindFirst("id").Value);
-            var typeEnum = (ItemTypeEnum) type;
-            if(typeEnum == ItemTypeEnum.Child)
+            var typeEnum = (ItemTypeEnum)type;
+            if (typeEnum == ItemTypeEnum.Child)
             {
                 var parentItemsIds = Items
                     .Where(i => i.ParentId == userId && i.ItemTypeEnum == ItemTypeEnum.Parent)
@@ -59,14 +56,14 @@ namespace Organize.WebApi.Controllers
                 : Items.Max(i => i.Id) + 1;
             newCreatedItem.Id = newId;
             Items.Add(newCreatedItem);
-            return Created(string.Empty,newCreatedItem.Id);
+            return Created(string.Empty, newCreatedItem.Id);
         }
 
         private BaseItem CreateItem(JObject itemAsJson)
         {
             var asBaseItem = itemAsJson.ToObject<BaseItem>();
 
-            BaseItem newCreatedItem = new BaseItem();
+            var newCreatedItem = new BaseItem();
             switch (asBaseItem.ItemTypeEnum)
             {
                 case ItemTypeEnum.Text:
@@ -88,15 +85,12 @@ namespace Organize.WebApi.Controllers
 
 
         [HttpPut]
-        public IActionResult Put([FromBody]JObject itemAsJson)
+        public IActionResult Put([FromBody] JObject itemAsJson)
         {
             var updatedItem = CreateItem(itemAsJson);
             var itemInList = Items.FirstOrDefault(i => i.Id == updatedItem.Id);
 
-            if(itemInList == null)
-            {
-                return BadRequest("Item not found");
-            }
+            if (itemInList == null) return BadRequest("Item not found");
 
             var index = Items.IndexOf(itemInList);
             Items[index] = updatedItem;
@@ -108,10 +102,7 @@ namespace Organize.WebApi.Controllers
         public IActionResult Delete(int id)
         {
             var item = Items.FirstOrDefault(i => i.Id == id);
-            if(item == null)
-            {
-                return BadRequest("No item with id found");
-            }
+            if (item == null) return BadRequest("No item with id found");
 
             Items.Remove(item);
             return Ok();

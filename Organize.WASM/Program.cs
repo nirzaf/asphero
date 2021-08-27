@@ -40,7 +40,7 @@ namespace Organize.WASM
             if (_isApipersistence)
             {
                 Console.WriteLine(builder.Configuration["apiAdress"]);
-                builder.Services.AddScoped(sp => 
+                builder.Services.AddScoped(sp =>
                     new HttpClient { BaseAddress = new Uri(builder.Configuration["apiAddress"]) });
                 builder.Services.AddScoped<IPersistenceService, WebAPIAccess.WebAPIAccess>();
                 builder.Services.AddScoped<IUserDataAccess, WebAPIAccess.WebAPIUserDataAccess>();
@@ -49,7 +49,6 @@ namespace Organize.WASM
                     provider => provider.GetRequiredService<WebAPIAuthenticationStateProvider>());
                 builder.Services.AddScoped<AuthenticationStateProvider>(
                     provider => provider.GetRequiredService<WebAPIAuthenticationStateProvider>());
-
             }
             else
             {
@@ -64,13 +63,13 @@ namespace Organize.WASM
                     provider => provider.GetRequiredService<SimpleAuthenticationStateProvider>());
             }
 
-           
+
             builder.Services.AddScoped<IUserManager, UserManager>();
             //builder.Services.AddScoped<IUserManager, UserManagerFake>();
             builder.Services.AddScoped<IUserItemManager, UserItemManager>();
 
             builder.Services.AddScoped<IItemDataAccess, ItemDataAccess>();
-       
+
 
             builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 

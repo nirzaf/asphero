@@ -18,7 +18,7 @@
     <div class="dropdown item-add-input">
         <Dropdown TValue="Organize.Shared.Enums.ItemTypeEnum"
                   SelectableItems="DropDownTypes"
-                  SelectedItemChanged="@(args => SelectedDropDownType = args)" />
+                  SelectedItemChanged="@(args => SelectedDropDownType = args)"/>
 
     </div>
     <button class="orga-button" @onclick="AddNewAsync" disabled="@(SelectedDropDownType == null)">Add</button>

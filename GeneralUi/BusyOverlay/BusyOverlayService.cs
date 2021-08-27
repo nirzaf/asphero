@@ -10,11 +10,8 @@ namespace GeneralUi.BusyOverlay
 
         protected virtual void OnBusyStateChanged(BusyChangedEventArgs e)
         {
-            EventHandler<BusyChangedEventArgs> handler = BusyStateChanged;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            var handler = BusyStateChanged;
+            if (handler != null) handler(this, e);
         }
 
         public BusyEnum CurrentBusyState { get; set; }
@@ -26,6 +23,5 @@ namespace GeneralUi.BusyOverlay
             eventArgs.BusyState = CurrentBusyState;
             OnBusyStateChanged(eventArgs);
         }
-
     }
 }

@@ -10,8 +10,8 @@ namespace Organize.Shared.Enitites
         {
             get => _subTitle;
             set => SetProperty(ref _subTitle, value);
-
         }
+
         private string _subTitle;
 
         public string Detail
@@ -19,6 +19,7 @@ namespace Organize.Shared.Enitites
             get => _detail;
             set => SetProperty(ref _detail, value);
         }
+
         private string _detail;
     }
 }

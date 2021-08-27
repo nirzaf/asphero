@@ -39,9 +39,7 @@ namespace Organize.WASM.OrganizeAuthenticationStateProvider
             var savedToken = await _localStorageService.GetItemAsync<string>("authToken");
 
             if (string.IsNullOrWhiteSpace(savedToken))
-            {
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
-            }
 
             try
             {
@@ -80,7 +78,7 @@ namespace Organize.WASM.OrganizeAuthenticationStateProvider
                 claims.Add(newRoleClaim);
             }
 
-             Console.WriteLine(JsonSerializer.Serialize(claims));
+            Console.WriteLine(JsonSerializer.Serialize(claims));
 
             var claimsPrincipal = new ClaimsPrincipal(
                 new ClaimsIdentity(claims, "apiauth"));

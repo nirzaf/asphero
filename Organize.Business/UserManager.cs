@@ -24,10 +24,7 @@ namespace Organize.Business
         public async Task InsertUserAsync(User user)
         {
             var isUserAlreadyAvailable = await _userDataAccess.IsUserWithNameAvailableAsync(user);
-            if (isUserAlreadyAvailable)
-            {
-                throw new Exception("Username already exists");
-            }
+            if (isUserAlreadyAvailable) throw new Exception("Username already exists");
 
             await _userDataAccess.InsertUserAsync(user);
         }

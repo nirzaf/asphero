@@ -12,15 +12,12 @@ namespace Organize.InMemoryStorage
 {
     public class InMemoryStorage : IPersistenceService
     {
-
-        private readonly Dictionary<Type, List<BaseEntity>> _entityDictionary = new Dictionary<Type, List<BaseEntity>>();
+        private readonly Dictionary<Type, List<BaseEntity>>
+            _entityDictionary = new Dictionary<Type, List<BaseEntity>>();
 
         private List<BaseEntity> GetListOrCreateIfNotAvailable<T>() where T : BaseEntity
         {
-            if (_entityDictionary.ContainsKey(typeof(T)))
-            {
-                return _entityDictionary[typeof(T)];
-            }
+            if (_entityDictionary.ContainsKey(typeof(T))) return _entityDictionary[typeof(T)];
 
             var newList = new List<BaseEntity>();
             _entityDictionary.Add(typeof(T), newList);

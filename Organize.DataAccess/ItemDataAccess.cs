@@ -18,10 +18,7 @@ namespace Organize.DataAccess
 
         public async Task DeleteItemsAsync<TItem>(IEnumerable<TItem> items) where TItem : BaseItem
         {
-            foreach(var item in items)
-            {
-                await _persistenceService.DeleteAsync<TItem>(item);
-            }
+            foreach (var item in items) await _persistenceService.DeleteAsync<TItem>(item);
         }
 
         public async Task<IEnumerable<TItem>> GetItemsOfUserAsync<TItem>(int parentId) where TItem : BaseItem

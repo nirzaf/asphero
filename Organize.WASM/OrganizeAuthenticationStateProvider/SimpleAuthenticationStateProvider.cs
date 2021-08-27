@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Components.Authorization;
+﻿using Microsoft.AspNetCore.Components.Authorization;
 using Organize.Shared.Contracts;
 using Organize.Shared.Enitites;
 using System;
@@ -21,26 +21,27 @@ namespace Organize.WASM.OrganizeAuthenticationStateProvider
 
         public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-
             if (_currentUserService.CurrentUser == null)
-            {
                 return Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())));
-            }
 
             var authenticatedUser = new ClaimsPrincipal(
-                new ClaimsIdentity(new[] { 
-                    new Claim("id", _currentUserService.CurrentUser.Id.ToString()),
-                    new Claim(ClaimTypes.Role,"admin")}
-                , "apiauth"));
+                new ClaimsIdentity(new[]
+                    {
+                        new Claim("id", _currentUserService.CurrentUser.Id.ToString()),
+                        new Claim(ClaimTypes.Role, "admin")
+                    }
+                    , "apiauth"));
             return Task.FromResult(new AuthenticationState(authenticatedUser));
         }
 
         public void SetAuthenticatedState(User user)
         {
-             var authenticatedUser = new ClaimsPrincipal(
-                new ClaimsIdentity(new[] { 
-                    new Claim("id", user.Id.ToString()), 
-                    new Claim(ClaimTypes.Role, "admin") }, 
+            var authenticatedUser = new ClaimsPrincipal(
+                new ClaimsIdentity(new[]
+                    {
+                        new Claim("id", user.Id.ToString()),
+                        new Claim(ClaimTypes.Role, "admin")
+                    },
                     "apiauth"));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
             NotifyAuthenticationStateChanged(authState);

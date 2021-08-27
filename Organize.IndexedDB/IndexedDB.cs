@@ -58,7 +58,7 @@ namespace Organize.IndexedDB
 
         private string SerializeAndRemoveArraysAndNavigationProperties<T>(T entity)
         {
-            var stringWithoutNavigationProperties = JsonConvert.SerializeObject(entity,_settings);
+            var stringWithoutNavigationProperties = JsonConvert.SerializeObject(entity, _settings);
             return stringWithoutNavigationProperties;
         }
 

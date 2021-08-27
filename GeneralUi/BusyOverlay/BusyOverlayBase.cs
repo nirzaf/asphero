@@ -7,11 +7,9 @@ namespace GeneralUi.BusyOverlay
 {
     public class BusyOverlayBase : ComponentBase
     {
-        [Parameter]
-        public RenderFragment ChildContent { get; set; }
+        [Parameter] public RenderFragment ChildContent { get; set; }
 
-        [Inject]
-        public BusyOverlayService BusyOverlayService { get; set; }
+        [Inject] public BusyOverlayService BusyOverlayService { get; set; }
 
         protected bool IsBusy { get; set; }
 

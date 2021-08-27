@@ -8,8 +8,7 @@ namespace BlazorExample.Pages.CascadingParameters
 {
     public partial class ChildOfChild : ComponentBase
     {
-        [CascadingParameter]
-        public int Number { get; set; }
+        [CascadingParameter] public int Number { get; set; }
 
         [CascadingParameter(Name = "H1")]
         //[CascadingParameter]

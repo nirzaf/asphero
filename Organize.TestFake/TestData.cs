@@ -25,24 +25,22 @@ namespace Organize.TestFake
             user.GenderType = GenderTypeEnum.Male;
             user.UserItems = new ObservableCollection<BaseItem>();
 
-            if(userManager != null)
-            {
-                userManager.InsertUserAsync(user);
-            }
+            if (userManager != null) userManager.InsertUserAsync(user);
 
             TextItem textItem = null;
-            if(userItemManager != null)
+            if (userItemManager != null)
             {
                 textItem = (TextItem)userItemManager
                     .CreateNewUserItemAndAddItToUserAsync(user, ItemTypeEnum.Text).Result;
-            } else
+            }
+            else
             {
                 textItem = new TextItem();
                 user.UserItems.Add(textItem);
             }
 
-            
-            textItem.ParentId = user.Id;    
+
+            textItem.ParentId = user.Id;
             textItem.Id = 1;
             textItem.Title = "Buy Apples";
             textItem.SubTitle = "Red | 5";
@@ -102,6 +100,7 @@ namespace Organize.TestFake
                 childItem = new ChildItem();
                 parentItem.ChildItems.Add(childItem);
             }
+
             childItem.ParentId = parentItem.Id;
             childItem.Id = 4;
             childItem.ItemTypeEnum = ItemTypeEnum.Child;

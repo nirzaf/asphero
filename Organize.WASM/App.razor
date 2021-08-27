@@ -1,14 +1,14 @@
 <Blazored.Modal.CascadingBlazoredModal>
     <CascadingAuthenticationState>
         <Router AppAssembly="@typeof(Program).Assembly"
-                AdditionalAssemblies="new[] { typeof(GeneralUi.About).Assembly}">
+                AdditionalAssemblies="new[] { typeof(GeneralUi.About).Assembly }">
             <Found Context="routeData">
                 <GeneralUi.BusyOverlay.BusyOverlay>
                     <div class="spinner-border" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </GeneralUi.BusyOverlay.BusyOverlay>
-                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
             </Found>
             <NotFound>
                 <LayoutView Layout="@typeof(MainLayout)">
